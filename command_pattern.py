@@ -42,6 +42,9 @@ class WorkflowCommander:
             "apply_b": ApplyBCommand,
             "apply_c": ApplyCCommand
         }
+        # このコードの大事なところはこのマッピングかも。
+        # このマッピングさえあれば、オブジェクト指向ではなく関数型でも実装できそう
+        # とはいえ、関数型だとメールを送る/送らないなどの制御が煩雑で見通しが悪そう
 
     def execute(self, received_request):
         key = list(received_request.keys())[1]  # 便宜上のコード。実際はコンポーネントキーを受け取る
