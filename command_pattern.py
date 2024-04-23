@@ -10,6 +10,7 @@ class Command:
 
 
 class ApplyACommand(Command, MailSenderMixin):
+    """apply_aはメール送信も必要なイメージ"""
 
     def create_request(self):
         super().create_request()
@@ -19,6 +20,7 @@ class ApplyACommand(Command, MailSenderMixin):
 
 
 class ApplyBCommand(Command):
+    """apply_bはメール送信が不要なイメージ"""
 
     def create_request(self):
         super().create_request()
@@ -46,4 +48,5 @@ class WorkflowCommander:
         command_class = self.command_map.get(key)
         instance = command_class(received_request)
         instance.create_request()
+        # 実際はここでワークフローへのリクエストを飛ばす
         return
