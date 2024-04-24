@@ -2,11 +2,11 @@ from mail_sender import MailSenderMixin
 
 
 class Command:
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, received_request):
+        self.received_request = received_request
 
     def create_request(self):
-        print(f"申請共通のrequest bodyを生成: {self.data['base_info']['apply_type']}")
+        print(f"申請共通のrequest bodyを生成: {self.received_request['base_info']['apply_type']}")
 
 
 class ApplyACommand(Command, MailSenderMixin):
@@ -14,7 +14,7 @@ class ApplyACommand(Command, MailSenderMixin):
 
     def create_request(self):
         super().create_request()
-        print(f"Apply A 用のrequest bodyを生成: {self.data['apply_a']}")
+        print(f"Apply A 用のrequest bodyを生成: {self.received_request['apply_a']}")
 
         self.send_mail("alice@example.com", "Hello, Alice!")
 
@@ -25,14 +25,14 @@ class ApplyBCommand(Command):
     def create_request(self):
         super().create_request()
 
-        print(f"Apply B 用のrequest bodyを生成: {self.data['apply_b']}")
+        print(f"Apply B 用のrequest bodyを生成: {self.received_request['apply_b']}")
 
 
 class ApplyCCommand(Command):
 
     def create_request(self):
         super().create_request()
-        print(f"Apply C 用の request bodyを生成: {self.data['apply_c']}")
+        print(f"Apply C 用の request bodyを生成: {self.received_request['apply_c']}")
 
 
 class WorkflowCommander:
